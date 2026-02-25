@@ -1,0 +1,39 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Fix 'Actor not available' error when saving songs and fingering settings",
+  "requirements": [
+    {
+      "id": "REQ-25",
+      "summary": "Fix the 'Actor not available' error by ensuring useBackendSequences.ts and useBackendFingerings.ts wait for actor initialization before making canister calls, and display user-friendly error messages instead of raw errors",
+      "acceptanceCriteria": [
+        "Clicking 'Save' for a song or fingering configuration no longer shows 'actor not available' to the user under normal network conditions",
+        "If the actor is not yet ready, a friendly toast or error message is shown instead of a raw error",
+        "The save operation succeeds once the actor is available and the canister call is made correctly",
+        "React Query cache is invalidated after a successful save so the UI reflects the persisted state"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useBackendSequences.ts",
+          "operation": "modify",
+          "description": "Add actor availability guard in the useSaveSequence mutation. Check that actor is defined and ready before invoking saveSequence. If actor is not available, throw a user-friendly error message ('Connecting to the network, please try again in a moment') instead of allowing the raw 'actor not available' error. Ensure the mutation is disabled (enabled: false) when actor is not yet initialized. After successful save, invalidate the 'sequences' query key to refresh the UI."
+        },
+        {
+          "path": "frontend/src/hooks/useBackendFingerings.ts",
+          "operation": "modify",
+          "description": "Add actor availability guard in the useSaveFingering mutation. Check that actor is defined and ready before invoking saveFingering. If actor is not available, throw a user-friendly error message ('Connecting to the network, please try again in a moment') instead of allowing the raw 'actor not available' error. Ensure the mutation is disabled (enabled: false) when actor is not yet initialized. After successful save, invalidate the 'fingerings' query key to refresh the UI."
+        },
+        {
+          "path": "frontend/src/pages/MainPage.tsx",
+          "operation": "modify",
+          "description": "Update the save melody handler to catch the user-friendly connection error from useSaveSequence and display it via toast notification. Ensure the UI gracefully handles the case where the save button is disabled while the actor is initializing. Add loading state feedback when the mutation is pending."
+        },
+        {
+          "path": "frontend/src/pages/AdminFingeringConfig.tsx",
+          "operation": "modify",
+          "description": "Update the save fingering handler to catch the user-friendly connection error from useSaveFingering and display it via toast notification. Ensure the UI gracefully handles the case where the save button is disabled while the actor is initializing. Add loading state feedback when the mutation is pending."
+        }
+      ]
+    }
+  ]
+}

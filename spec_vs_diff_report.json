@@ -1,0 +1,22 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-25T07:42:04.013Z",
+  "summary": "The diff modifies two frontend hook files (useBackendFingerings.ts and useBackendSequences.ts) to add actor availability guards and friendly error messages, and invalidates React Query cache on success. However, there is no evidence of any changes to the Motoko backend file (backend/main.mo), which is required by REQ-26.",
+  "missing_requirements": [
+    {
+      "id": "REQ-26",
+      "requirement": "Audit and harden the Motoko backend actor (backend/main.mo) to ensure update functions for saving tablature sequences and setting fingering configurations are correctly defined with stable variable declarations, correct argument types, and proper result types.",
+      "reason": "The diff shows no changes to backend/main.mo. None of the acceptance criteria for REQ-26 (compilation without errors, correct argument types, proper result types, stable variable declarations) can be verified from the diff.",
+      "evidence": []
+    }
+  ],
+  "hallucinated_features": [],
+  "confidence": 0.9,
+  "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/src/hooks/useBackendFingerings.ts",
+    "frontend/src/hooks/useBackendSequences.ts",
+    "project_state.json"
+  ]
+}

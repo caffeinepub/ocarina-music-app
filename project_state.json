@@ -1,0 +1,237 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 11,
+  "summary": "Ocarina music app on Caffeine AI. Features a 3D turtle-shaped ocarina model where the mouthpiece is the turtle's mouth and the shell forms the body. Fingering holes are positioned on top and labeled for left hand and right hand index and middle fingers (4 holes total). Supports clicking notes to play, auto-recording duration, and writing tablature in freestyle mode. Preset tones cover one octave fingering applicable across C3-C7. Admin can configure fingering (closed holes per note) which updates tablature. Main page includes piano keyboard, sheet music view, and tablature display. Option to add more instruments beyond ocarina in the future.",
+  "architectural_notes": [
+    "3D ocarina model requires a WebGL/Three.js or similar 3D rendering approach",
+    "Fingering config is admin-controlled and drives tablature generation logic",
+    "Preset tones should map to ocarina-specific audio samples across C3-C7 range",
+    "Ocarina 3D model is turtle-shaped: mouthpiece = turtle mouth, body = shell, 4 holes labeled as LH index, LH middle, RH index, RH middle"
+  ],
+  "known_issues": [
+    "\"Actor not available\" error appears when attempting to save settings or songs, suggesting the IC actor/agent is not initialized or connected when the save calls are made"
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-create-a-main-page-layout-with-three-primary-sections-1-a-piano-keyboard-at-the-bottom-for-note-selection-2-a-sheet-music-view-in-the-center-displaying-the-current-sequence-of-notes-with-durations-and-3-a-tablature-display-panel-that-shows-the-ocarina-hole-fingering-diagram-for-each-recorded-note",
+      "title": "Create a main page layout with three primary sections: (1) a piano keyboard at the bottom for note selection, (2) a sheet music view in the center displaying the current sequence of notes with durations, and (3) a tablature display panel that shows the ocarina hole-fingering diagram for each recorded note.",
+      "reqIds": [
+        "REQ-1",
+        "REQ-11"
+      ],
+      "version": 2
+    },
+    {
+      "id": "feature-render-a-3d-realistic-ocarina-model-using-react-three-fiber-three-js-depicted-as-if-held-in-user-s-hands-hands-visible-gripping-the-instrument-the-model-must-display-a-2x2-grid-of-4-parallel-holes-on-top-and-be-freely-rotatable-by-click-dragging",
+      "title": "Render a 3D realistic ocarina model using React Three Fiber/Three.js, depicted as if held in user's hands (hands visible gripping the instrument). The model must display a 2x2 grid of 4 parallel holes on top, and be freely rotatable by click-dragging.",
+      "reqIds": [
+        "REQ-12",
+        "REQ-2"
+      ],
+      "version": 2
+    },
+    {
+      "id": "feature-animate-fingertips-on-the-3d-ocarina-model-to-visually-close-the-corresponding-holes-when-a-note-is-active-being-played-or-hovered-closed-holes-should-show-a-fingertip-mesh-covering-them-open-holes-should-be-uncovered",
+      "title": "Animate fingertips on the 3D ocarina model to visually close the corresponding holes when a note is active (being played or hovered). Closed holes should show a fingertip mesh covering them; open holes should be uncovered.",
+      "reqIds": [
+        "REQ-13",
+        "REQ-3"
+      ],
+      "version": 2
+    },
+    {
+      "id": "feature-implement-play-mode-when-the-user-clicks-a-note-on-the-piano-keyboard-play-the-corresponding-preset-ocarina-tone-automatically-record-the-note-and-its-duration-from-mouse-down-to-mouse-up-and-append-an-entry-to-the-current-tablature-sequence",
+      "title": "Implement Play Mode: when the user clicks a note on the piano keyboard, play the corresponding preset ocarina tone, automatically record the note and its duration (from mouse-down to mouse-up), and append an entry to the current tablature sequence.",
+      "reqIds": [
+        "REQ-14",
+        "REQ-4"
+      ],
+      "version": 2
+    },
+    {
+      "id": "feature-implement-preset-ocarina-tones-using-the-web-audio-api-define-one-octave-of-fingering-patterns-covering-notes-c-d-e-f-g-a-b-and-sharps-flats-where-applicable-that-map-to-the-2x2-hole-layout-apply-the-same-one-octave-fingering-pattern-across-the-c3-c7-range-by-adjusting-pitch-frequency-for-the-selected-octave-while-keeping-the-same-hole-configuration",
+      "title": "Implement preset ocarina tones using the Web Audio API. Define one octave of fingering patterns (covering notes C, D, E, F, G, A, B and sharps/flats where applicable) that map to the 2x2 hole layout. Apply the same one-octave fingering pattern across the C3–C7 range by adjusting pitch (frequency) for the selected octave while keeping the same hole configuration.",
+      "reqIds": [
+        "REQ-15",
+        "REQ-5"
+      ],
+      "version": 2
+    },
+    {
+      "id": "feature-implement-an-admin-fingering-configuration-panel-accessible-via-an-admin-button-or-route-in-this-panel-an-admin-can-view-each-note-name-toggle-which-of-the-4-holes-in-the-2x2-grid-are-closed-for-that-note-and-save-the-configuration-saving-updates-the-fingering-used-by-the-app-globally-affecting-both-the-3d-model-animations-and-the-tablature-output",
+      "title": "Implement an Admin Fingering Configuration panel (accessible via an 'Admin' button or route). In this panel, an admin can view each note name, toggle which of the 4 holes (in the 2x2 grid) are closed for that note, and save the configuration. Saving updates the fingering used by the app globally, affecting both the 3D model animations and the tablature output.",
+      "reqIds": [
+        "REQ-16",
+        "REQ-6"
+      ],
+      "version": 2
+    },
+    {
+      "id": "feature-persist-recorded-tablature-sequences-in-the-backend-expose-functions-to-save-a-completed-tablature-sequence-list-of-note-duration-pairs-and-retrieve-all-saved-sequences-display-saved-sequences-in-a-list-on-the-main-page-so-users-can-review-previous-recordings",
+      "title": "Persist recorded tablature sequences in the backend. Expose functions to save a completed tablature sequence (list of note + duration pairs) and retrieve all saved sequences. Display saved sequences in a list on the main page so users can review previous recordings.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-design-the-app-with-a-warm-earthy-fantasy-aesthetic-think-aged-parchment-backgrounds-warm-amber-terracotta-forest-green-tones-hand-crafted-typography-and-subtle-wood-grain-or-stone-texture-accents-the-layout-should-feel-like-an-ancient-music-chamber-apply-this-theme-consistently-across-all-ui-components",
+      "title": "Design the app with a warm, earthy fantasy aesthetic — think aged parchment backgrounds, warm amber/terracotta/forest-green tones, hand-crafted typography, and subtle wood-grain or stone texture accents. The layout should feel like an ancient music chamber. Apply this theme consistently across all UI components.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-structure-the-frontend-to-support-adding-more-instruments-beyond-the-ocarina-in-the-future-use-an-instrument-selector-ui-element-e-g-a-dropdown-or-tab-on-the-main-page-that-currently-shows-only-ocarina-but-is-architected-to-accommodate-additional-instruments-without-major-refactoring",
+      "title": "Structure the frontend to support adding more instruments beyond the Ocarina in the future. Use an instrument selector UI element (e.g., a dropdown or tab) on the main page that currently shows only 'Ocarina' but is architected to accommodate additional instruments without major refactoring.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-persist-recorded-tablature-sequences-in-the-backend-motoko-actor-expose-update-and-query-functions-to-save-a-completed-tablature-sequence-list-of-note-duration-pairs-and-retrieve-all-saved-sequences-display-saved-sequences-in-a-list-on-the-main-page-so-users-can-review-previous-recordings",
+      "title": "Persist recorded tablature sequences in the backend Motoko actor. Expose update and query functions to save a completed tablature sequence (list of note + duration pairs) and retrieve all saved sequences. Display saved sequences in a list on the main page so users can review previous recordings.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-persist-fingering-configurations-in-the-backend-motoko-actor-expose-query-and-update-functions-to-get-and-set-the-note-to-holes-mapping-the-frontend-admin-panel-reads-from-and-writes-to-these-backend-functions",
+      "title": "Persist fingering configurations in the backend Motoko actor. Expose query and update functions to get and set the note-to-holes mapping. The frontend Admin panel reads from and writes to these backend functions.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-design-the-app-with-a-warm-earthy-fantasy-aesthetic-aged-parchment-backgrounds-warm-amber-terracotta-forest-green-tones-hand-crafted-typography-and-subtle-wood-grain-or-stone-texture-accents-the-layout-should-feel-like-an-ancient-music-chamber-apply-this-theme-consistently-across-all-ui-components",
+      "title": "Design the app with a warm, earthy fantasy aesthetic — aged parchment backgrounds, warm amber/terracotta/forest-green tones, hand-crafted typography, and subtle wood-grain or stone texture accents. The layout should feel like an ancient music chamber. Apply this theme consistently across all UI components.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-structure-the-frontend-to-support-adding-more-instruments-beyond-the-ocarina-in-the-future-include-an-instrument-selector-ui-element-e-g-a-dropdown-or-tab-on-the-main-page-that-currently-shows-only-ocarina-but-is-architected-to-accommodate-additional-instruments-without-major-refactoring",
+      "title": "Structure the frontend to support adding more instruments beyond the Ocarina in the future. Include an instrument selector UI element (e.g., a dropdown or tab) on the main page that currently shows only 'Ocarina' but is architected to accommodate additional instruments without major refactoring.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-redesign-the-3d-ocarina-model-in-ocarina3dmodel-tsx-to-look-like-a-turtle-the-overall-body-shape-should-resemble-a-turtle-shell-domed-oval-rounded-body-with-a-textured-shell-pattern-on-top-the-mouthpiece-protrudes-from-the-front-as-the-turtle-s-mouth-head-and-the-tail-end-is-the-back-of-the-turtle-the-four-fingering-holes-are-positioned-on-the-top-of-the-shell-in-a-2x2-arrangement-add-subtle-limb-flipper-shapes-on-the-sides-of-the-body-to-complete-the-turtle-silhouette-maintain-the-ability-to-freely-rotate-the-model-by-click-dragging-orbitcontrols-and-keep-the-warm-earthy-color-palette-consistent-with-the-app-theme-e-g-forest-green-and-amber-tones-for-the-shell",
+      "title": "Redesign the 3D ocarina model in Ocarina3DModel.tsx to look like a turtle: the overall body shape should resemble a turtle shell (domed, oval/rounded body with a textured shell pattern on top), the mouthpiece protrudes from the front as the turtle's mouth/head, and the tail end is the back of the turtle. The four fingering holes are positioned on the top of the shell in a 2x2 arrangement. Add subtle limb/flipper shapes on the sides of the body to complete the turtle silhouette. Maintain the ability to freely rotate the model by click-dragging (OrbitControls) and keep the warm earthy color palette consistent with the app theme (e.g., forest green and amber tones for the shell).",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-four-fingering-holes-on-the-turtle-ocarina-model-and-throughout-the-entire-app-admin-fingering-config-panel-tablaturepanel-hole-diagrams-and-any-label-legend-ui-to-be-labeled-and-described-as-left-hand-index-top-left-hole-left-hand-middle-top-right-hole-right-hand-index-bottom-left-hole-right-hand-middle-bottom-right-hole-replace-any-generic-hole-1-2-3-4-or-positional-labels-with-these-descriptive-left-right-hand-finger-labels-update-the-fingering-map-type-definitions-and-default-fingering-constants-to-use-these-new-hole-identifiers-if-they-are-currently-positional-numeric",
+      "title": "Update the four fingering holes on the turtle ocarina model and throughout the entire app (Admin Fingering Config panel, TablaturePanel hole diagrams, and any label/legend UI) to be labeled and described as: Left Hand Index (top-left hole), Left Hand Middle (top-right hole), Right Hand Index (bottom-left hole), Right Hand Middle (bottom-right hole). Replace any generic 'Hole 1/2/3/4' or positional labels with these descriptive left/right hand finger labels. Update the fingering map type definitions and default fingering constants to use these new hole identifiers if they are currently positional/numeric.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-frontend-api-call-layer-for-saving-tablature-sequences-in-usebackendsequences-ts-and-fingering-configurations-in-usebackendfingerings-ts-ensure-argument-serialization-matches-the-motoko-backend-function-signatures-exactly-handle-errors-gracefully-by-displaying-a-user-readable-toast-error-message-instead-of-a-raw-error-and-invalidate-relevant-react-query-caches-on-successful-save-so-the-ui-reflects-the-persisted-state",
+      "title": "Fix the frontend API call layer for saving tablature sequences (in useBackendSequences.ts) and fingering configurations (in useBackendFingerings.ts). Ensure argument serialization matches the Motoko backend function signatures exactly, handle errors gracefully by displaying a user-readable toast/error message instead of a raw error, and invalidate relevant React Query caches on successful save so the UI reflects the persisted state.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-actor-not-available-error-that-occurs-when-attempting-to-save-tablature-sequences-or-fingering-configurations-in-useactor-ts-read-only-the-actor-is-created-via-react-query-ensure-that-usebackendsequences-ts-and-usebackendfingerings-ts-wait-for-the-actor-to-be-fully-initialized-before-invoking-any-canister-calls-add-a-guard-that-checks-actor-availability-and-either-retries-or-surfaces-a-clear-user-readable-error-message-e-g-connecting-to-the-network-please-try-again-in-a-moment-instead-of-the-raw-actor-not-available-error",
+      "title": "Fix the 'Actor not available' error that occurs when attempting to save tablature sequences or fingering configurations. In useActor.ts (read-only) the actor is created via React Query — ensure that useBackendSequences.ts and useBackendFingerings.ts wait for the actor to be fully initialized before invoking any canister calls. Add a guard that checks actor availability and either retries or surfaces a clear user-readable error message (e.g., 'Connecting to the network, please try again in a moment') instead of the raw 'actor not available' error.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "3D realistic ocarina model shown as held in user's hands, rotatable, with 2x2 parallel holes layout",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Finger tips visually close holes on the 3D ocarina model during play",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Main page with piano keyboard, sheet music view, and tablature display",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Play mode: click notes to play, auto-record note duration, freestyle tablature creation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Preset ocarina tones; one octave fingering pattern applies across C3-C7",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Admin fingering config: set closed holes per note, updates tablature accordingly",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Support for adding more instruments beyond ocarina in the future",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Persist fingering configurations in the backend (Motoko actor). Expose query and update functions to get and set the note-to-holes mapping. The frontend Admin panel reads from and writes to these backend functions.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Redesign 3D ocarina model as a turtle shape: mouthpiece is the turtle's mouth, shell forms the instrument body, fingering holes on top labeled for left/right hand index and middle fingers",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Audit and fix the Motoko backend actor functions for saving tablature sequences and fingering configurations. Ensure the update functions for saving sequences and setting fingering maps are correctly defined, accept the right argument types, and return proper result types. Fix any type mismatches, missing stable variable declarations, or incorrect function signatures that would cause canister call errors.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Audit and harden the Motoko backend actor (backend/main.mo) to ensure the update functions for saving tablature sequences and setting fingering configurations are correctly defined with stable variable declarations, correct argument types, and proper result types. Fix any type mismatches or missing declarations that could cause canister call errors from the frontend.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Ocarina Music App",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,26 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-fix-the-actor-not-available-error-that-occurs-when-attempting-to-save-tablature-sequences-or-fingering-configurations-in-useactor-ts-read-only-the-actor-is-created-via-react-query-ensure-that-usebackendsequences-ts-and-usebackendfingerings-ts-wait-for-the-actor-to-be-fully-initialized-before-invoking-any-canister-calls-add-a-guard-that-checks-actor-availability-and-either-retries-or-surfaces-a-clear-user-readable-error-message-e-g-connecting-to-the-network-please-try-again-in-a-moment-instead-of-the-raw-actor-not-available-error",
+      "featureTitle": "Fix the 'Actor not available' error that occurs when attempting to save tablature sequences or fingering configurations. In useActor.ts (read-only) the actor is created via React Query — ensure that useBackendSequences.ts and useBackendFingerings.ts wait for the actor to be fully initialized before invoking any canister calls. Add a guard that checks actor availability and either retries or surfaces a clear user-readable error message (e.g., 'Connecting to the network, please try again in a moment') instead of the raw 'actor not available' error.",
+      "files": [
+        "frontend/src/hooks/useBackendFingerings.ts",
+        "frontend/src/hooks/useBackendSequences.ts"
+      ],
+      "components": [
+        "blob-storage@4.0.0",
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-25"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "kind": "build_request",
+  "title": "Fix 'Actor not available' error when saving songs and fingering settings",
+  "projectName": "Turtle Ocarina",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-25",
+      "text": "Fix the 'Actor not available' error that occurs when attempting to save tablature sequences or fingering configurations. In useActor.ts (read-only) the actor is created via React Query — ensure that useBackendSequences.ts and useBackendFingerings.ts wait for the actor to be fully initialized before invoking any canister calls. Add a guard that checks actor availability and either retries or surfaces a clear user-readable error message (e.g., 'Connecting to the network, please try again in a moment') instead of the raw 'actor not available' error.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "error message shows actor not available when trying to save settings or song"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking 'Save' for a song or fingering configuration no longer shows 'actor not available' to the user under normal network conditions",
+        "If the actor is not yet ready, a friendly toast or error message is shown instead of a raw error",
+        "The save operation succeeds once the actor is available and the canister call is made correctly",
+        "React Query cache is invalidated after a successful save so the UI reflects the persisted state"
+      ]
+    },
+    {
+      "id": "REQ-26",
+      "text": "Audit and harden the Motoko backend actor (backend/main.mo) to ensure the update functions for saving tablature sequences and setting fingering configurations are correctly defined with stable variable declarations, correct argument types, and proper result types. Fix any type mismatches or missing declarations that could cause canister call errors from the frontend.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "error message shows actor not available when trying to save settings or song"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The Motoko actor compiles without errors",
+        "The saveSequence (or equivalent) update function accepts the correct argument types matching what the frontend sends",
+        "The setFingering (or equivalent) update function accepts the correct argument types matching what the frontend sends",
+        "Both functions return proper result types (e.g., #ok / #err variants) that the frontend can handle",
+        "Stable variables for sequences and fingering configurations are declared correctly so state persists across upgrades"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify frontend/src/hooks/useActor.ts or any other immutable path listed in the system context",
+    "All Motoko logic must remain in the single backend/main.mo actor file"
+  ],
+  "nonGoals": [
+    "Adding new features or UI redesigns",
+    "Changing the fingering map defaults or hole labels",
+    "Modifying the 3D ocarina model"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

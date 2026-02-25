@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Warm earthy parchment palette */
+    --background: 0.92 0.04 85;
+    --foreground: 0.22 0.05 45;
+
+    --card: 0.88 0.05 80;
+    --card-foreground: 0.22 0.05 45;
+
+    --popover: 0.90 0.04 82;
+    --popover-foreground: 0.22 0.05 45;
+
+    /* Terracotta primary */
+    --primary: 0.52 0.14 38;
+    --primary-foreground: 0.97 0.01 85;
+
+    /* Amber secondary */
+    --secondary: 0.78 0.10 75;
+    --secondary-foreground: 0.22 0.05 45;
+
+    /* Forest green accent */
+    --accent: 0.38 0.09 145;
+    --accent-foreground: 0.97 0.01 85;
+
+    --muted: 0.85 0.04 78;
+    --muted-foreground: 0.45 0.05 55;
+
+    --destructive: 0.55 0.20 25;
+    --destructive-foreground: 0.97 0.01 85;
+
+    --border: 0.72 0.07 65;
+    --input: 0.80 0.05 75;
+    --ring: 0.52 0.14 38;
+
+    --chart-1: 0.52 0.14 38;
+    --chart-2: 0.38 0.09 145;
+    --chart-3: 0.78 0.10 75;
+    --chart-4: 0.60 0.12 55;
+    --chart-5: 0.45 0.10 30;
+
+    --sidebar: 0.85 0.05 78;
+    --sidebar-foreground: 0.22 0.05 45;
+    --sidebar-primary: 0.52 0.14 38;
+    --sidebar-primary-foreground: 0.97 0.01 85;
+    --sidebar-accent: 0.78 0.10 75;
+    --sidebar-accent-foreground: 0.22 0.05 45;
+    --sidebar-border: 0.72 0.07 65;
+    --sidebar-ring: 0.52 0.14 38;
+  }
+
+  .dark {
+    --background: 0.18 0.04 45;
+    --foreground: 0.92 0.03 80;
+
+    --card: 0.22 0.04 48;
+    --card-foreground: 0.92 0.03 80;
+
+    --popover: 0.25 0.04 50;
+    --popover-foreground: 0.92 0.03 80;
+
+    --primary: 0.65 0.14 42;
+    --primary-foreground: 0.15 0.03 40;
+
+    --secondary: 0.30 0.05 50;
+    --secondary-foreground: 0.92 0.03 80;
+
+    --accent: 0.42 0.10 148;
+    --accent-foreground: 0.92 0.03 80;
+
+    --muted: 0.28 0.04 48;
+    --muted-foreground: 0.65 0.04 65;
+
+    --destructive: 0.60 0.20 28;
+    --destructive-foreground: 0.92 0.03 80;
+
+    --border: 0.35 0.04 52;
+    --input: 0.30 0.04 50;
+    --ring: 0.65 0.14 42;
+
+    --sidebar: 0.20 0.04 46;
+    --sidebar-foreground: 0.92 0.03 80;
+    --sidebar-primary: 0.65 0.14 42;
+    --sidebar-primary-foreground: 0.15 0.03 40;
+    --sidebar-accent: 0.30 0.05 50;
+    --sidebar-accent-foreground: 0.92 0.03 80;
+    --sidebar-border: 0.35 0.04 52;
+    --sidebar-ring: 0.65 0.14 42;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Lora', Georgia, serif;
+    background-image: url('/assets/generated/parchment-bg.dim_1024x1024.png');
+    background-repeat: repeat;
+    background-size: 512px 512px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', 'Times New Roman', serif;
+  }
+}
+
+@layer components {
+  .parchment-panel {
+    background-image: url('/assets/generated/parchment-bg.dim_1024x1024.png');
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    @apply border border-border rounded-lg shadow-md;
+  }
+
+  .wood-panel {
+    background-image: url('/assets/generated/wood-grain.dim_512x512.png');
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    @apply border border-border;
+  }
+
+  .stone-panel {
+    background-image: url('/assets/generated/stone-texture.dim_512x512.png');
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    @apply border border-border;
+  }
+
+  .cinzel {
+    font-family: 'Cinzel', 'Times New Roman', serif;
+  }
+
+  .lora {
+    font-family: 'Lora', Georgia, serif;
+  }
+}
